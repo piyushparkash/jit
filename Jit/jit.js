@@ -7899,8 +7899,8 @@ Graph.Label.DOM = new Class({
          || pos.y >= size.height || pos.y < -pos.h) return false;      	
       }
       else {
-      	if (pos.x >= size.width || pos.x < 0
-         || pos.y >= size.height || pos.y < 0) return false;
+      	// if (pos.x >= size.width || pos.x < 0
+        //  || pos.y >= size.height || pos.y < 0) return false;
       }
        return true;
     }
@@ -9981,6 +9981,13 @@ $jit.ST.Label.DOM = new Class({
         var style = tag.style;
         style.left = labelPos.x + 'px';
         style.top  = labelPos.y + 'px';
+        style.transform = "scale(" +sx+", "+sy+")";
+
+        if (config.Label.type == "SVG") {
+            tag.setAttribute("x", labelPos.x)
+            tag.setAttribute("y", labelPos.y)
+            tag.setAttribute("transform", "scale(" +sx+", "+sy+")")
+        }
         style.display = this.fitsInCanvas(labelPos, canvas)? '' : 'none';
         controller.onPlaceLabel(tag, node);
     }
